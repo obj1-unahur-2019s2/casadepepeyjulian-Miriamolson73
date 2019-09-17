@@ -27,3 +27,29 @@ object plancha {
 	method esComida() { return false }
 	method esElectrodomestico() { return true }	
 }
+object packComida {
+	var property plato
+	var property aderezo
+	method precio(){
+		return plato.precio()+aderezo.precio()
+	}
+}	
+object 	packRegalo {
+	var pack = []
+	method comprar(cosa){
+		pack.add(cosa)
+	}
+	method esComida(){ //indica si todas las cosas compradas son comida
+		return pack.all({cosa=>cosa.esComida()})	
+	}
+	method esElectrodomestico(){return not self.esComida()}
+	
+	method precio(){
+		return pack.sum({cosa=>cosa.precio()})*0.8
+	
+} 
+	
+	
+	
+	
+}
