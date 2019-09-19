@@ -1,19 +1,12 @@
 import cosas.* 
-/* comprar(cosa)`: registra que se ha comprado una cosa.
-- `cantidadDeCosasCompradas()`: indica ... eso.
-- `tieneComida()`: indica si compró algo que es comida al menos una vez.
-- `vieneDeEquiparse()`: indica si la _última_ cosa que se compró es un electrodoméstico, o bien vale más de 5000 pesos.
-- `esDerrochona()`: indica si el importe total de las cosas compradas es de 9000 pesos o más.
-- `compraMasCara()`: retorna la cosa comprada de mayor valor.
-- `electrodomésticosComprados()`: devuelve un objeto que contiene todas las cosas compradas que son electrodomésticos. 
-- `malaEpoca()`: indica si todas las cosas compradas son comida.
-- `queFaltaComprar(lista)`: recibe una lista de cosas y devuelve las cosas de esa lista que aún no se han comprado. <br>
-  **Atención**: es una pregunta. No se pide que se compren. 
-- `faltaComida()`: indica si se han comprado menos de 2 cosas que son comida.*/
+import CuentaBancaria.*
+
 object casaDePepeYJulian {
+	var property cuantaQueEstaUsando=cuentacorriente
 	const cosas = []
 	method comprar(cosa){
 		cosas.add(cosa)
+		self.gastar(cosa.precio())
 	}
 	method cantidadDeCosasCompradas(){
 		return cosas.size()
@@ -45,12 +38,25 @@ object casaDePepeYJulian {
 		 
 		 return conjCosas.difference(conjLista)
 		}*/
-	method queFaltaComprar(lista){
-		return lista.filter({quiero=>not cosas.contains(quiero)})
-	}		
+	method queFaltaComprar(lista)= lista.filter({quiero=>not cosas.contains(quiero)})
+			
 		
-	method faltaComida(){ //`: indica si se han comprado menos de 2 cosas que son comida.*/
-	    return cosas.count({cosa=>cosa.esComida()})<2
-}
+	method faltaComida()= cosas.count({cosa=>cosa.esComida()})<2
 
+
+	method gastoEnComida()= self.comidasCompradas().sum({cosa=>cosa.precio()})
+
+  
+  	method comidasCompradas ()= cosas.filter ({cosa=>cosa.esComida()})
+  	
+  	
+ 	method hayElectrodomesticosBaratos()= self.electrodomesticosComprados().any({cosa=>cosa.precio()<3000})
+
+    method precioDeElectrodomesticos()=self.electrodomesticosComprados().map({cosa=>cosa.precio()})
+
+	method nivelDeAumento()= cosas.last().precio() >= cosas.first().precio() *2
+	
+	method primeraComidaComprada()= self.comidasCompradas().first()
+
+	method 
 }

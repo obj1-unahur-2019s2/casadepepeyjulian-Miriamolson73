@@ -46,10 +46,52 @@ object 	packRegalo {
 	
 	method precio(){
 		return pack.sum({cosa=>cosa.precio()})*0.8
-	
+}	
 } 
-	
-	
-	
-	
+object milanesasRebozadasXKilo{ 
+	var property precio=260
+
+	method esComida()= true
+	method esElectrodomestico() = false	
 }
+object salsaTomates { 
+	var property precio=90
+	
+
+	method esComida()= true
+	method esElectrodomestico() = false	
+	
+	}
+object microondas { 
+	var property precio=4200
+
+
+
+	method esComida()= false
+	method esElectrodomestico() = true
+}
+object cebollasXKilo { 
+	var property precio=25
+	method esComida()= true
+	method esElectrodomestico() = false
+}
+
+
+object compu {
+	
+	var precio=500
+	method precio() {return precio * dolar.cotizacion()}
+	method esComida()= false
+	method esElectrodomestico() = true
+}
+	
+
+object dolar{
+	var property cotizacion=1
+}
+
+
+	
+	
+	
+
